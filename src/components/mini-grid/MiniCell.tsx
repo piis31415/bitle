@@ -11,7 +11,6 @@ export const MiniCell = ({ status }: Props) => {
     {
       'bg-white': status === 'absent',
       'bg-green-500': status === 'correct',
-      'bg-yellow-500': status === 'present',
     }
   )
 
