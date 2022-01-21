@@ -61,18 +61,18 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      This is a parody based off an open source clone of the game Wordle -{' '}
+                      This is a parody based on an open source clone of the game Wordle -{' '}
                       <a
                         href="https://github.com/hannahcode/wordle"
                         className="underline font-bold"
                       >
-                        check out the clone code here
+                        check out the clone code here,
                       </a>{' '}
                       <a
                         href="https://github.com/piis31415/bitle"
                         className="underline font-bold"
                       >
-                        check out my code here
+                        check out my code here,
                       </a>{' '}
                       and{' '}
                       <a
