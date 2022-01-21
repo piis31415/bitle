@@ -66,7 +66,13 @@ export const AboutModal = ({ isOpen, handleClose }: Props) => {
                         href="https://github.com/hannahcode/wordle"
                         className="underline font-bold"
                       >
-                        check out the code here
+                        check out the clone code here
+                      </a>{' '}
+                      <a
+                        href="https://github.com/piis31415/bitle"
+                        className="underline font-bold"
+                      >
+                        check out my code here
                       </a>{' '}
                       and{' '}
                       <a
