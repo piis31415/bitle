@@ -63,12 +63,12 @@ export const StatsModal = ({ isOpen, handleClose, gameStats }: Props) => {
                 <div className="text-center">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg leading-6 font-medium text-gray-900"
+                    className="text-lg leading-2 font-medium text-gray-900"
                   >
                     Statistics
                   </Dialog.Title>
                   <StatBar gameStats={gameStats} />
-                  <h4 className="text-lg leading-6 font-medium text-gray-900">
+                  <h4 className="text-lg leading-2 font-medium text-gray-900">
                     Guess Distribution
                   </h4>
                   <Histogram gameStats={gameStats} />

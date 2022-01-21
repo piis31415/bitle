@@ -8,7 +8,8 @@ export const shareStatus = (guesses: string[]) => {
       ' ' +
       guesses.length +
       '/2\n\n' +
-      generateEmojiGrid(guesses)
+      generateEmojiGrid(guesses) +
+      '\nhttps://jas0n.net/bitle'
   )
 }
 
