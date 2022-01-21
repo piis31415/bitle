@@ -6,7 +6,7 @@ export const shareStatus = (guesses: string[]) => {
     'Bitle ' +
       solutionIndex +
       ' ' +
-      guesses.length +
+      (guesses[0] === guesses[1] ? 'X' : guesses.length) +
       '/2\n\n' +
       generateEmojiGrid(guesses) +
       '\nhttps://jas0n.net/bitle'

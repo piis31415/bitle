@@ -7,6 +7,7 @@ import { Keyboard } from './components/keyboard/Keyboard'
 import { AboutModal } from './components/modals/AboutModal'
 import { InfoModal } from './components/modals/InfoModal'
 import { WinModal } from './components/modals/WinModal'
+import { LoseModal } from './components/modals/LoseModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
@@ -19,6 +20,7 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState('')
   const [isGameWon, setIsGameWon] = useState(false)
   const [isWinModalOpen, setIsWinModalOpen] = useState(false)
+  const [isLoseModalOpen, setIsLoseModalOpen] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
@@ -33,6 +35,10 @@ function App() {
     }
     if (loaded.guesses.includes(solution)) {
       setIsGameWon(true)
+      setIsGameLost(false)
+    } else if (loaded.guesses.length === 2) {
+      setIsGameWon(false)
+      setIsGameLost(true)
     }
     return loaded.guesses
   })
@@ -49,6 +55,12 @@ function App() {
     }
   }, [isGameWon])
 
+  useEffect(() => {
+    if (isGameLost) {
+      setIsLoseModalOpen(true)
+    }
+  }, [isGameLost])
+
   const onChar = (value: string) => {
     if (currentGuess.length < 1 && guesses.length < 2 && !isGameWon) {
       setCurrentGuess(`${currentGuess}${value}`)
@@ -60,6 +72,7 @@ function App() {
   }
 
   const onEnter = () => {
+    if (!isGameWon && !isGameLost){
     if (!(currentGuess.length === 1)) {
       setIsNotEnoughLetters(true)
       return setTimeout(() => {
@@ -85,24 +98,20 @@ function App() {
         return setIsGameWon(true)
       }
 
-      if (guesses.length === 2) {
+      if (guesses.length === 1) {
         setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         setIsGameLost(true)
         return setTimeout(() => {
           setIsGameLost(false)
         }, 2000)
       }
-    }
+    }}
   }
 
   return (
     <div className="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
       <Alert message="Not enough letters" isOpen={isNotEnoughLetters} />
       <Alert message="Word not found" isOpen={isWordNotFoundAlertOpen} />
-      <Alert
-        message={`You lost, the bit was ${solution}. Wait how did you do this this shouldn't be possible`}
-        isOpen={isGameLost}
-      />
       <Alert
         message="Game copied to clipboard"
         isOpen={shareComplete}
@@ -132,6 +141,18 @@ function App() {
         guesses={guesses}
         handleShare={() => {
           setIsWinModalOpen(false)
+          setShareComplete(true)
+          return setTimeout(() => {
+            setShareComplete(false)
+          }, 2000)
+        }}
+      />
+      <LoseModal
+        isOpen={isLoseModalOpen}
+        handleClose={() => setIsLoseModalOpen(false)}
+        guesses={guesses}
+        handleShare={() => {
+          setIsLoseModalOpen(false)
           setShareComplete(true)
           return setTimeout(() => {
             setShareComplete(false)
