@@ -30,6 +30,22 @@ export const addStatsForCompletedGame = (
   return stats
 }
 
+export const addStatsForLostGame = (
+  gameStats: GameStats,
+  count: number
+) => {
+  // Count is number of incorrect guesses before end.
+  const stats = { ...gameStats }
+
+  stats.totalGames += 1
+  stats.gamesFailed += 1
+  stats.currentStreak = 0
+  stats.successRate = getSuccessRate(stats)
+
+  saveStatsToLocalStorage(stats)
+  return stats
+}
+
 const defaultStats: GameStats = {
   winDistribution: [0, 0],
   gamesFailed: 0,

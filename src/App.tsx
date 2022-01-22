@@ -10,7 +10,7 @@ import { WinModal } from './components/modals/WinModal'
 import { LoseModal } from './components/modals/LoseModal'
 import { StatsModal } from './components/modals/StatsModal'
 import { isWordInWordList, isWinningWord, solution } from './lib/words'
-import { addStatsForCompletedGame, loadStats } from './lib/stats'
+import { addStatsForCompletedGame, addStatsForLostGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
@@ -99,7 +99,7 @@ function App() {
       }
 
       if (guesses.length === 1) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        setStats(addStatsForLostGame(stats, guesses.length))
         setIsGameLost(true)
         return setTimeout(() => {
           setIsGameLost(false)
